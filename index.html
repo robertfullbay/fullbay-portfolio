@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fullbay AI Automation Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B2A4A;
+  --navy-light: #243660;
+  --navy-dark: #111c32;
+  --teal: #1A7A8A;
+  --teal-light: #2196A8;
+  --teal-dim: #1A7A8A22;
+  --green: #1A5C2A;
+  --green-light: #227636;
+  --orange: #C05600;
+  --orange-light: #D96200;
+  --white: #FFFFFF;
+  --gray-50: #F8F9FB;
+  --gray-100: #EEF0F4;
+  --gray-200: #DDE1E9;
+  --gray-300: #C4CAD6;
+  --gray-400: #8E97A8;
+  --gray-500: #5C6678;
+  --gray-700: #2E3748;
+  --text: #1B2A4A;
+  --text-muted: #5C6678;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow: 0 2px 8px rgba(27,42,74,0.10);
+  --shadow-lg: 0 4px 20px rgba(27,42,74,0.15);
+  --transition: 0.18s ease;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--gray-50);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ── HEADER ── */
+.app-header {
+  background: var(--navy);
+  color: white;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.app-logo-mark {
+  width: 32px; height: 32px;
+  background: var(--teal);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: white;
+  letter-spacing: -0.5px;
+}
+.app-logo-text { font-weight: 600; font-size: 15px; letter-spacing: -0.2px; }
+.app-logo-sub { font-size: 11px; color: var(--gray-300); font-weight: 400; }
+.remember-badge {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: rgba(26,122,138,0.25);
+  border: 1px solid var(--teal);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: #7ECFDA;
+}
+.remember-badge.active { display: flex; }
+.remember-badge a { color: #7ECFDA; text-decoration: underline; cursor: pointer; font-size: 11px; }
+
+/* ── TABS ── */
+.tab-nav {
+  background: var(--navy-dark);
+  display: flex;
+  padding: 0 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--gray-300);
+  padding: 14px 18px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+  white-space: nowrap;
+  letter-spacing: 0.1px;
+}
+.tab-btn:hover { color: white; }
+.tab-btn.active { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+/* ── MAIN ── */
+.main { max-width: 1280px; margin: 0 auto; padding: 28px 32px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── PAGE TITLES ── */
+.page-title { font-size: 22px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; }
+.page-sub { color: var(--text-muted); font-size: 13px; margin-top: 3px; }
+.page-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 16px; border-radius: var(--radius);
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  cursor: pointer; border: none; transition: var(--transition);
+  white-space: nowrap;
+}
+.btn-primary { background: var(--teal); color: white; }
+.btn-primary:hover { background: var(--teal-light); }
+.btn-navy { background: var(--navy); color: white; }
+.btn-navy:hover { background: var(--navy-light); }
+.btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--gray-200); }
+.btn-ghost:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-dim); }
+.btn-orange { background: var(--orange); color: white; }
+.btn-orange:hover { background: var(--orange-light); }
+.btn-green { background: var(--green); color: white; }
+.btn-green:hover { background: var(--green-light); }
+.btn-sm { padding: 5px 11px; font-size: 12px; }
+.btn-icon { width: 14px; height: 14px; }
+
+/* ── CARDS ── */
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-100);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+.card-title { font-size: 13px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; }
+
+/* ── METRIC CARDS ── */
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 24px; }
+.metric-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-100);
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+}
+.metric-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text-muted); margin-bottom: 8px; }
+.metric-value { font-size: 28px; font-weight: 700; color: var(--navy); letter-spacing: -1px; line-height: 1; }
+.metric-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.metric-card.accent-teal { border-left: 3px solid var(--teal); }
+.metric-card.accent-green { border-left: 3px solid var(--green); }
+.metric-card.accent-orange { border-left: 3px solid var(--orange); }
+.metric-card.accent-navy { border-left: 3px solid var(--navy); }
+
+/* ── IMPACT STRIP ── */
+.impact-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+@media (max-width: 700px) { .impact-strip { grid-template-columns: repeat(2,1fr); } }
+.impact-card {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-100);
+  padding: 14px 16px;
+  text-align: center;
+}
+.impact-val { font-size: 24px; font-weight: 700; color: var(--navy); letter-spacing: -0.8px; }
+.impact-lbl { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+
+/* ── TABLE ── */
+.table-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--gray-100); background: white; box-shadow: var(--shadow); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead { background: var(--navy); color: white; }
+thead th { padding: 11px 14px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+tbody tr { border-bottom: 1px solid var(--gray-100); cursor: pointer; transition: background var(--transition); }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: #EEF4F7; }
+tbody td { padding: 11px 14px; vertical-align: middle; }
+
+/* ── BADGES ── */
+.badge {
+  display: inline-block;
+  padding: 2px 9px; border-radius: 20px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+.badge-live { background: #D4EDDA; color: #155724; }
+.badge-build { background: #FFF3CD; color: #856404; }
+.badge-active { background: #CCE5FF; color: #004085; }
+.badge-complete { background: var(--gray-100); color: var(--gray-500); }
+
+/* ── DEPT BADGE COLORS (auto palette) ── */
+.dept-0 { background: #E3F0FB; color: #1A5C8A; }
+.dept-1 { background: #E8F5E9; color: #1A5C2A; }
+.dept-2 { background: #FFF3E0; color: #7B3F00; }
+.dept-3 { background: #F3E5F5; color: #4A148C; }
+.dept-4 { background: #E0F7FA; color: #006064; }
+.dept-5 { background: #FCE4EC; color: #880E4F; }
+.dept-6 { background: #F1F8E9; color: #33691E; }
+.dept-7 { background: #E8EAF6; color: #1A237E; }
+
+/* ── USAGE BAR ── */
+.usage-bar-wrap { display: flex; align-items: center; gap: 8px; min-width: 80px; }
+.usage-bar-bg { flex: 1; height: 6px; background: var(--gray-100); border-radius: 3px; }
+.usage-bar-fill { height: 6px; border-radius: 3px; background: var(--teal); transition: width 0.4s; }
+.usage-count { font-size: 11px; color: var(--text-muted); min-width: 20px; text-align: right; }
+
+/* ── FORMS ── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1 / -1; }
+label { font-size: 12px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.2px; }
+input[type="text"], input[type="url"], input[type="number"], select, textarea {
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 9px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--text);
+  background: white;
+  transition: border-color var(--transition);
+  width: 100%;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(26,122,138,0.12);
+}
+textarea { resize: vertical; min-height: 80px; }
+.form-hint { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+.form-section { margin-bottom: 28px; }
+.form-section-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-100); text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ── DETAIL VIEW ── */
+.detail-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(17,28,50,0.6);
+  backdrop-filter: blur(2px);
+  z-index: 200;
+  overflow-y: auto;
+}
+.detail-overlay.open { display: block; }
+.detail-panel {
+  background: var(--gray-50);
+  max-width: 860px;
+  margin: 40px auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: slideUp 0.22s ease;
+}
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.detail-header {
+  background: var(--navy);
+  color: white;
+  padding: 20px 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.detail-title { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+.detail-meta { font-size: 12px; color: var(--gray-300); margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap; }
+.close-btn {
+  background: rgba(255,255,255,0.1);
+  border: none; border-radius: 6px;
+  width: 32px; height: 32px;
+  cursor: pointer; color: white;
+  font-size: 18px; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition); flex-shrink: 0;
+}
+.close-btn:hover { background: rgba(255,255,255,0.2); }
+.detail-body { padding: 24px; }
+.detail-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.detail-field label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text-muted); display: block; margin-bottom: 3px; }
+.detail-field p { font-size: 13px; color: var(--text); }
+.detail-field a { color: var(--teal); text-decoration: none; }
+.detail-field a:hover { text-decoration: underline; }
+
+/* ── USAGE PANEL ── */
+.usage-panel { margin-top: 20px; }
+.usage-panel-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+.adoption-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.adoption-card {
+  background: white;
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+.adoption-name { font-size: 12px; font-weight: 600; color: var(--navy); }
+.adoption-role { font-size: 10px; color: var(--text-muted); margin-bottom: 6px; }
+.adoption-hrs { font-size: 18px; font-weight: 700; color: var(--teal); }
+.adoption-sub { font-size: 10px; color: var(--text-muted); }
+.adoption-note { font-size: 11px; color: var(--gray-500); margin-top: 4px; font-style: italic; }
+
+/* ── LOG FORM ── */
+.log-form {
+  background: white;
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-top: 16px;
+}
+.log-form-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+.log-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 500px) { .log-grid { grid-template-columns: 1fr; } }
+
+/* ── SYNC TAB ── */
+.sync-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 700px) { .sync-grid { grid-template-columns: 1fr; } }
+.sync-card { background: white; border-radius: var(--radius-lg); border: 1px solid var(--gray-100); box-shadow: var(--shadow); padding: 22px; }
+.sync-card h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.sync-card p { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.6; }
+.prompt-box {
+  background: var(--navy-dark);
+  color: #B0C4DE;
+  border-radius: var(--radius);
+  padding: 14px;
+  font-size: 11px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: 'DM Sans', monospace;
+  white-space: pre-wrap;
+}
+.import-area {
+  border: 2px dashed var(--gray-200);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--transition);
+  margin-bottom: 12px;
+}
+.import-area:hover { border-color: var(--teal); }
+.import-area.dragover { border-color: var(--teal); background: var(--teal-dim); }
+.import-area p { font-size: 12px; color: var(--text-muted); }
+#merge-result { font-size: 12px; padding: 8px 12px; border-radius: var(--radius); margin-top: 8px; display: none; }
+#merge-result.success { background: #D4EDDA; color: #155724; display: block; }
+#merge-result.error { background: #F8D7DA; color: #721C24; display: block; }
+
+/* ── DASHBOARD ── */
+.dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 800px) { .dash-grid { grid-template-columns: 1fr; } }
+.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.bar-label { font-size: 12px; color: var(--text); min-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-bg { flex: 1; height: 8px; background: var(--gray-100); border-radius: 4px; }
+.bar-fill { height: 8px; border-radius: 4px; transition: width 0.5s; }
+.bar-val { font-size: 11px; color: var(--text-muted); min-width: 48px; text-align: right; }
+
+/* ── EMPTY STATE ── */
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+.empty-state-icon { font-size: 36px; margin-bottom: 12px; }
+.empty-state h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+.empty-state p { font-size: 13px; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--navy);
+  color: white; padding: 12px 18px;
+  border-radius: var(--radius); font-size: 13px;
+  z-index: 999; opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+  max-width: 320px;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* ── DIVIDER ── */
+.divider { border: none; border-top: 1px solid var(--gray-100); margin: 20px 0; }
+
+/* ── FILTER BAR ── */
+.filter-bar { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+.filter-bar input[type="text"] { max-width: 220px; }
+.filter-bar select { max-width: 150px; }
+
+/* ── SCROLL LOCK ── */
+body.modal-open { overflow: hidden; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="app-logo">
+    <div class="app-logo-mark">FB</div>
+    <div>
+      <div class="app-logo-text">AI Automation Portfolio</div>
+      <div class="app-logo-sub">Fullbay Onboarding — CCO Dashboard</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px">
+    <span id="syncStatus" style="font-size:11px;color:var(--gray-400)">Connecting...</span>
+    <button class="btn btn-ghost btn-sm" onclick="refreshFromCloud()" style="border-color:rgba(255,255,255,0.2);color:var(--gray-300);font-size:11px" title="Pull latest from cloud">Sync Now</button>
+    <div class="remember-badge" id="rememberBadge">
+      Remembered: <strong id="rememberedName">—</strong>
+      &nbsp;<a onclick="clearRemember()">reset</a>
+    </div>
+  </div>
+</header>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('portfolio')">Portfolio</button>
+  <button class="tab-btn" onclick="showTab('dashboard')">Impact Dashboard</button>
+  <button class="tab-btn" onclick="showTab('submit')">Submit Project</button>
+  <button class="tab-btn" onclick="showTab('sync')">Sync &amp; Export</button>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- ══════════════════ PORTFOLIO TAB ══════════════════ -->
+  <div class="tab-panel active" id="tab-portfolio">
+    <div class="page-header">
+      <div>
+        <div class="page-title">AI Project Portfolio</div>
+        <div class="page-sub">Click any row to view details, usage reports, and impact metrics</div>
+      </div>
+      <button class="btn btn-primary" onclick="showTab('submit')">+ Add Project</button>
+    </div>
+
+    <div class="filter-bar">
+      <input type="text" id="searchInput" placeholder="Search projects..." oninput="renderPortfolio()">
+      <select id="filterStatus" onchange="renderPortfolio()">
+        <option value="">All Statuses</option>
+        <option value="Live">Live</option>
+        <option value="In Build">In Build</option>
+        <option value="Active">Active</option>
+        <option value="Complete">Complete</option>
+      </select>
+      <select id="filterDept" onchange="renderPortfolio()">
+        <option value="">All Departments</option>
+      </select>
+    </div>
+
+    <div class="table-wrap" id="portfolioTable"></div>
+  </div>
+
+  <!-- ══════════════════ DASHBOARD TAB ══════════════════ -->
+  <div class="tab-panel" id="tab-dashboard">
+    <div class="page-header">
+      <div>
+        <div class="page-title">Impact Dashboard</div>
+        <div class="page-sub">CCO-ready metrics calculated from all submitted usage reports</div>
+      </div>
+    </div>
+
+    <div class="metric-grid" id="topMetrics"></div>
+
+    <div class="dash-grid">
+      <div class="card">
+        <div class="card-title">Hours Recovered by Department</div>
+        <div id="deptHrsBars" style="margin-top:14px"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Cost Recovered by Department</div>
+        <div id="deptCostBars" style="margin-top:14px"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top Projects by Hours Recovered</div>
+        <div id="projHrsBars" style="margin-top:14px"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top Projects by Cost Recovered</div>
+        <div id="projCostBars" style="margin-top:14px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SUBMIT TAB ══════════════════ -->
+  <div class="tab-panel" id="tab-submit">
+    <div class="page-header">
+      <div>
+        <div class="page-title">Submit a Project</div>
+        <div class="page-sub">Add a new AI automation to the team portfolio</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <form id="submitForm" onsubmit="handleSubmit(event)">
+
+        <div class="form-section">
+          <div class="form-section-title">Project Details</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Owner *</label>
+              <input type="text" id="f_owner" required placeholder="Your full name">
+            </div>
+            <div class="form-group">
+              <label>Department *</label>
+              <input type="text" id="f_dept" required placeholder="e.g. Onboarding, Data, Solutions">
+            </div>
+            <div class="form-group">
+              <label>Project Name *</label>
+              <input type="text" id="f_name" required placeholder="Descriptive title for this automation">
+            </div>
+            <div class="form-group">
+              <label>Tools Used *</label>
+              <input type="text" id="f_tools" required placeholder="e.g. Claude, ChatGPT, Make.com">
+            </div>
+            <div class="form-group">
+              <label>Status *</label>
+              <select id="f_status" required>
+                <option value="">Select status...</option>
+                <option value="Live">Live</option>
+                <option value="In Build">In Build</option>
+                <option value="Active">Active</option>
+                <option value="Complete">Complete</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Frequency / Trigger</label>
+              <input type="text" id="f_freq" placeholder="e.g. Daily, Per onboarding call, Weekly">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title">Outcomes</div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>Manual Work Eliminated</label>
+              <textarea id="f_manual" placeholder="Describe the manual work this automation replaces..."></textarea>
+            </div>
+            <div class="form-group full">
+              <label>Business Outcome</label>
+              <textarea id="f_outcome" placeholder="What business result does this produce?"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Output / Artifact Type</label>
+              <input type="text" id="f_artifact" placeholder="e.g. Email draft, Report, Checklist">
+            </div>
+            <div class="form-group">
+              <label>Artifact / Doc Link</label>
+              <input type="url" id="f_link" placeholder="https://...">
+            </div>
+            <div class="form-group full">
+              <label>Tied To (Strategic Goal)</label>
+              <input type="text" id="f_goal" placeholder="e.g. Reduce TTV, Scale without headcount, Improve NPS">
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;justify-content:flex-end">
+          <button type="button" class="btn btn-ghost" onclick="clearSubmitForm()">Clear</button>
+          <button type="submit" class="btn btn-primary">Submit Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SYNC TAB ══════════════════ -->
+  <div class="tab-panel" id="tab-sync">
+    <div class="page-header">
+      <div>
+        <div class="page-title">Sync &amp; Export</div>
+        <div class="page-sub">Share data with teammates or import their projects and usage logs</div>
+      </div>
+    </div>
+
+    <div class="sync-grid">
+
+      <div class="sync-card">
+        <h3>Export My Data</h3>
+        <p>Download your full portfolio as a JSON file. Share this with teammates or upload to a shared drive. Safe to re-import — merges by ID.</p>
+        <button class="btn btn-navy" onclick="exportJSON()">Download JSON Export</button>
+      </div>
+
+      <div class="sync-card">
+        <h3>Import &amp; Merge JSON</h3>
+        <p>Paste JSON from a teammate or drag in a file. New projects are added; existing ones have usage logs merged (no duplicates by timestamp).</p>
+        <div class="import-area" id="dropZone" onclick="document.getElementById('fileInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+          <p>Click to select a JSON file or drag and drop here</p>
+        </div>
+        <input type="file" id="fileInput" accept=".json" style="display:none" onchange="handleFileImport(event)">
+        <textarea id="jsonPasteArea" placeholder='Or paste JSON directly here...' style="min-height:80px;font-size:11px;font-family:monospace"></textarea>
+        <button class="btn btn-teal btn-primary" style="margin-top:8px;width:100%" onclick="importFromPaste()">Import from Paste</button>
+        <div id="merge-result"></div>
+      </div>
+
+      <div class="sync-card" style="grid-column:1/-1">
+        <h3>Import from ChatGPT — Self-Interview Prompt</h3>
+        <p>Copy this prompt into ChatGPT. It will interview you one question at a time, then output a JSON file you can paste above to import into the portfolio.</p>
+        <div class="prompt-box" id="chatgptPrompt"></div>
+        <button class="btn btn-ghost btn-sm" onclick="copyPrompt()">Copy Prompt</button>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- ══════════════════ DETAIL OVERLAY ══════════════════ -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetail(event)">
+  <div class="detail-panel">
+    <div class="detail-header">
+      <div>
+        <div class="detail-title" id="dTitle"></div>
+        <div class="detail-meta" id="dMeta"></div>
+      </div>
+      <button class="close-btn" onclick="closeDetailBtn()">&#x2715;</button>
+    </div>
+    <div class="detail-body">
+      <div class="impact-strip" id="dImpact"></div>
+      <div class="detail-fields" id="dFields"></div>
+      <hr class="divider">
+      <div class="usage-panel">
+        <div class="usage-panel-title">
+          Team Adoption &amp; Usage
+          <button class="btn btn-ghost btn-sm" onclick="toggleLogForm()">Log Your Usage</button>
+        </div>
+        <div class="adoption-grid" id="adoptionGrid"></div>
+        <div class="log-form" id="logForm" style="display:none">
+          <div class="log-form-title">Log a Usage Report</div>
+          <div class="log-grid">
+            <div class="form-group">
+              <label>Your Name *</label>
+              <input type="text" id="log_name" required placeholder="Full name">
+            </div>
+            <div class="form-group">
+              <label>Role *</label>
+              <select id="log_role" required>
+                <option value="">Select role...</option>
+                <option value="Sr. Project Manager">Sr. Project Manager ($136/hr)</option>
+                <option value="Project Manager">Project Manager ($104/hr)</option>
+                <option value="Assoc. Project Manager">Assoc. Project Manager ($56/hr)</option>
+                <option value="Sr. Onboarder">Sr. Onboarder ($60/hr)</option>
+                <option value="Onboarder">Onboarder ($52/hr)</option>
+                <option value="Sr. Data Analyst">Sr. Data Analyst ($76/hr)</option>
+                <option value="Data Analyst">Data Analyst ($52/hr)</option>
+                <option value="Sr. Solution Engineer">Sr. Solution Engineer ($76/hr)</option>
+                <option value="Solution Engineer">Solution Engineer ($60/hr)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tool Used *</label>
+              <select id="log_tool" required>
+                <option value="">Select tool...</option>
+                <option>Claude</option>
+                <option>ChatGPT</option>
+                <option>Cowork</option>
+                <option>Make.com</option>
+                <option>Multiple</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Frequency *</label>
+              <select id="log_freq" required>
+                <option value="">Select frequency...</option>
+                <option value="5">Daily (5x/wk)</option>
+                <option value="3">Few times/week (3x)</option>
+                <option value="1">Weekly (1x)</option>
+                <option value="0.5">Few times/month (0.5x)</option>
+                <option value="0.25">Monthly (0.25x)</option>
+                <option value="0.1">Rarely (0.1x)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Time Saved Per Use *</label>
+              <select id="log_time" required>
+                <option value="">Select time...</option>
+                <option value="0.25">15 min (0.25 hr)</option>
+                <option value="0.5">30 min (0.5 hr)</option>
+                <option value="1">1 hour</option>
+                <option value="2">2 hours</option>
+                <option value="3">3 hours</option>
+                <option value="4">4 hours</option>
+                <option value="8">8 hours (full day)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Optional Note</label>
+              <input type="text" id="log_note" placeholder="What did you use it for?">
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:14px;justify-content:flex-end">
+            <button class="btn btn-ghost btn-sm" onclick="toggleLogForm()">Cancel</button>
+            <button class="btn btn-primary btn-sm" onclick="submitUsageLog()">Submit Usage</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════
+//  CONSTANTS
+// ══════════════════════════════════════════════
+const VERSION = 5;
+const STORAGE_KEY = 'fb_ai_portfolio_v5';
+const REMEMBER_KEY = 'fb_ai_remember';
+
+// ── JSONbin.io config ──
+const JSONBIN_ID  = '69f0e2df36566621a800bcbe';
+const JSONBIN_KEY = '$2a$10$FA4tnM7DIzAEhVFakyTZWeDrMZAb9CkPJNMepYTdGdR2de6IrKtUG';
+const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
+
+const LCR_RATES = {
+  'Sr. Project Manager': 136,
+  'Project Manager': 104,
+  'Assoc. Project Manager': 56,
+  'Sr. Onboarder': 60,
+  'Onboarder': 52,
+  'Sr. Data Analyst': 76,
+  'Data Analyst': 52,
+  'Sr. Solution Engineer': 76,
+  'Solution Engineer': 60,
+};
+
+const FREQ_MAP = {
+  '5': 5, '3': 3, '1': 1, '0.5': 0.5, '0.25': 0.25, '0.1': 0.1
+};
+
+const DEPT_COLORS = ['dept-0','dept-1','dept-2','dept-3','dept-4','dept-5','dept-6','dept-7'];
+const BAR_COLORS = ['#1A7A8A','#1A5C2A','#C05600','#1B2A4A','#7B3F00','#4A148C','#006064','#880E4F'];
+
+const CHATGPT_PROMPT = `You are helping me document my AI automation work for my company's portfolio tracker.
+
+Please interview me ONE QUESTION AT A TIME in this order:
+
+1. What is your full name?
+2. What is your role? (Options: Sr. Project Manager, Project Manager, Assoc. Project Manager, Sr. Onboarder, Onboarder, Sr. Data Analyst, Data Analyst, Sr. Solution Engineer, Solution Engineer)
+3. What department do you work in?
+
+Then for each AI project I mention, ask:
+4. What is the project name?
+5. What AI tools do you use? (Claude, ChatGPT, Cowork, Make.com, Multiple, or Other)
+6. What manual work does this automation replace?
+7. What is the business outcome?
+8. What is the output or artifact type?
+9. How often do you use it? (Daily=5x/wk, Few times/week=3x, Weekly=1x, Few times/month=0.5x, Monthly=0.25x, Rarely=0.1x)
+10. How much time does it save per use? (0.25h, 0.5h, 1h, 2h, 3h, 4h, or 8h)
+11. Do you have a link to the artifact or doc? (optional)
+12. What strategic goal is this tied to? (optional)
+13. What is the current status? (Live, In Build, Active, or Complete)
+
+After collecting all projects, ask: "Are there any other projects you'd like to add?"
+
+When done, output ONLY a valid JSON object with NO markdown code fences, NO explanation — just raw JSON in this exact structure:
+
+{
+  "version": 5,
+  "exported_at": "ISO timestamp here",
+  "entries": [
+    {
+      "id": "uuid-string",
+      "name": "Project Name",
+      "owner": "Full Name",
+      "dept": "Department",
+      "tools": "Tools Used",
+      "status": "Live",
+      "freq": "Daily",
+      "manual": "Manual work eliminated",
+      "outcome": "Business outcome",
+      "artifact": "Output type",
+      "link": "",
+      "goal": "Strategic goal",
+      "created": "ISO timestamp",
+      "usageLogs": [
+        {
+          "name": "Full Name",
+          "role": "Role",
+          "tool": "Tool",
+          "freq": 5,
+          "time_saved": 1,
+          "note": "",
+          "ts": "ISO timestamp"
+        }
+      ]
+    }
+  ]
+}`;
+
+// ══════════════════════════════════════════════
+//  DATA LAYER — JSONbin cloud + localStorage cache
+// ══════════════════════════════════════════════
+
+// Sync status indicator
+function setSyncStatus(state, msg) {
+  const el = document.getElementById('syncStatus');
+  if (!el) return;
+  const states = { loading: '#8E97A8', ok: '#1A7A8A', error: '#C05600', saving: '#C05600' };
+  el.style.color = states[state] || '#8E97A8';
+  el.textContent = msg;
+}
+
+// LocalStorage helpers (cache)
+function loadLocal() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return { version: VERSION, entries: [] };
+    return JSON.parse(raw);
+  } catch(e) { return { version: VERSION, entries: [] }; }
+}
+function saveLocal(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+// Read from JSONbin
+async function fetchFromCloud() {
+  setSyncStatus('loading', 'Syncing...');
+  try {
+    const res = await fetch(JSONBIN_URL + '/latest', {
+      headers: { 'X-Master-Key': JSONBIN_KEY }
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    const data = json.record || { version: VERSION, entries: [] };
+    saveLocal(data);
+    setSyncStatus('ok', 'Synced ' + new Date().toLocaleTimeString());
+    return data;
+  } catch(e) {
+    setSyncStatus('error', 'Offline — using local cache');
+    return loadLocal();
+  }
+}
+
+// Write to JSONbin
+async function pushToCloud(data) {
+  setSyncStatus('saving', 'Saving...');
+  saveLocal(data); // optimistic local save first
+  try {
+    const res = await fetch(JSONBIN_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': JSONBIN_KEY
+      },
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    setSyncStatus('ok', 'Saved ' + new Date().toLocaleTimeString());
+  } catch(e) {
+    setSyncStatus('error', 'Save failed — stored locally');
+  }
+}
+
+// Synchronous read from local cache (for immediate renders)
+function getData() { return loadLocal().entries || []; }
+
+// Async write — push to cloud and refresh UI
+async function setData(entries) {
+  const d = loadLocal();
+  d.entries = entries;
+  d.version = VERSION;
+  await pushToCloud(d);
+}
+
+// Full async load from cloud then re-render
+async function refreshFromCloud() {
+  await fetchFromCloud();
+  renderPortfolio();
+  if (document.getElementById('tab-dashboard').classList.contains('active')) renderDashboard();
+}
+
+function genId() {
+  return 'e_' + Date.now() + '_' + Math.random().toString(36).slice(2,8);
+}
+
+// Legacy alias so mergeImport still works
+function loadData() { return loadLocal(); }
+function saveData(data) { saveLocal(data); pushToCloud(data); }
+
+// ══════════════════════════════════════════════
+//  REMEMBER ME
+// ══════════════════════════════════════════════
+function loadRemember() {
+  try { return JSON.parse(localStorage.getItem(REMEMBER_KEY)) || null; } catch(e) { return null; }
+}
+function saveRemember(name, role) {
+  localStorage.setItem(REMEMBER_KEY, JSON.stringify({ name, role }));
+}
+function clearRemember() {
+  localStorage.removeItem(REMEMBER_KEY);
+  updateRememberBadge();
+  document.getElementById('log_name').value = '';
+  document.getElementById('log_role').value = '';
+  showToast('Remembered name and role cleared');
+}
+function updateRememberBadge() {
+  const r = loadRemember();
+  const badge = document.getElementById('rememberBadge');
+  const nameEl = document.getElementById('rememberedName');
+  if (r && r.name) {
+    badge.classList.add('active');
+    nameEl.textContent = r.name;
+  } else {
+    badge.classList.remove('active');
+  }
+}
+function prefillLogForm() {
+  const r = loadRemember();
+  if (r) {
+    if (r.name) document.getElementById('log_name').value = r.name;
+    if (r.role) document.getElementById('log_role').value = r.role;
+  }
+}
+
+// ══════════════════════════════════════════════
+//  CALCULATIONS
+// ══════════════════════════════════════════════
+function calcEntry(entry) {
+  const logs = entry.usageLogs || [];
+  let totalHrs = 0, totalCost = 0;
+  const byPerson = {};
+  logs.forEach(l => {
+    const freq = parseFloat(l.freq) || 0;
+    const time = parseFloat(l.time_saved) || 0;
+    const rate = LCR_RATES[l.role] || 52;
+    const hrs = freq * time;
+    const cost = hrs * rate;
+    totalHrs += hrs;
+    totalCost += cost;
+    const key = l.name;
+    if (!byPerson[key]) byPerson[key] = { name: l.name, role: l.role, hrs: 0, cost: 0, tool: l.tool, notes: [] };
+    byPerson[key].hrs += hrs;
+    byPerson[key].cost += cost;
+    if (l.note) byPerson[key].notes.push(l.note);
+  });
+  return {
+    hrs: totalHrs,
+    cost: totalCost,
+    annualized: totalCost * 52,
+    fte: totalHrs / 40,
+    people: Object.values(byPerson),
+    logCount: logs.length
+  };
+}
+function calcAll(entries) {
+  let totalHrs = 0, totalCost = 0;
+  const byDept = {}, byProj = {};
+  entries.forEach(e => {
+    const c = calcEntry(e);
+    totalHrs += c.hrs;
+    totalCost += c.cost;
+    const dept = e.dept || 'Unknown';
+    if (!byDept[dept]) byDept[dept] = { hrs: 0, cost: 0 };
+    byDept[dept].hrs += c.hrs;
+    byDept[dept].cost += c.cost;
+    byProj[e.name] = { hrs: c.hrs, cost: c.cost };
+  });
+  return {
+    totalHrs, totalCost,
+    annualized: totalCost * 52,
+    fte: totalHrs / 40,
+    byDept, byProj
+  };
+}
+
+// ══════════════════════════════════════════════
+//  DEPT COLOR HELPER
+// ══════════════════════════════════════════════
+const deptColorMap = {};
+let deptColorIdx = 0;
+function deptClass(dept) {
+  if (!deptColorMap[dept]) {
+    deptColorMap[dept] = DEPT_COLORS[deptColorIdx++ % DEPT_COLORS.length];
+  }
+  return deptColorMap[dept];
+}
+
+// ══════════════════════════════════════════════
+//  STATUS BADGE
+// ══════════════════════════════════════════════
+function statusBadge(s) {
+  const map = { 'Live': 'live', 'In Build': 'build', 'Active': 'active', 'Complete': 'complete' };
+  return `<span class="badge badge-${map[s] || 'active'}">${s}</span>`;
+}
+function fmt$(n) { return '$' + Math.round(n).toLocaleString(); }
+function fmtH(n) { return n.toFixed(1) + ' hrs'; }
+function fmtFTE(n) { return n.toFixed(2) + ' FTE'; }
+
+// ══════════════════════════════════════════════
+//  TABS
+// ══════════════════════════════════════════════
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.textContent.toLowerCase().includes(id === 'portfolio' ? 'portfolio' :
+        id === 'dashboard' ? 'impact' : id === 'submit' ? 'submit' : 'sync')) {
+      b.classList.add('active');
+    }
+  });
+  if (id === 'portfolio') renderPortfolio();
+  if (id === 'dashboard') renderDashboard();
+  if (id === 'sync') renderSync();
+}
+
+// ══════════════════════════════════════════════
+//  PORTFOLIO RENDER
+// ══════════════════════════════════════════════
+function renderPortfolio() {
+  const entries = getData();
+  const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
+  const statusFilter = document.getElementById('filterStatus')?.value || '';
+  const deptFilter = document.getElementById('filterDept')?.value || '';
+
+  // populate dept filter
+  const deptSel = document.getElementById('filterDept');
+  if (deptSel) {
+    const depts = [...new Set(entries.map(e => e.dept).filter(Boolean))].sort();
+    const cur = deptSel.value;
+    deptSel.innerHTML = '<option value="">All Departments</option>' +
+      depts.map(d => `<option value="${esc(d)}" ${cur===d?'selected':''}>${esc(d)}</option>`).join('');
+  }
+
+  let filtered = entries.filter(e => {
+    const txt = (e.name + e.owner + e.dept + e.tools + e.goal + e.outcome).toLowerCase();
+    return (!search || txt.includes(search)) &&
+           (!statusFilter || e.status === statusFilter) &&
+           (!deptFilter || e.dept === deptFilter);
+  });
+
+  const maxLogs = Math.max(1, ...filtered.map(e => (e.usageLogs||[]).length));
+
+  const table = document.getElementById('portfolioTable');
+  if (!filtered.length) {
+    table.innerHTML = `<div class="empty-state">
+      <div class="empty-state-icon">[&#x25A1;]</div>
+      <h3>${entries.length ? 'No projects match your filters' : 'No projects yet'}</h3>
+      <p>${entries.length ? 'Try clearing your filters' : 'Submit your first AI automation using the Submit Project tab'}</p>
+    </div>`;
+    return;
+  }
+
+  table.innerHTML = `<table>
+    <thead><tr>
+      <th>Project Name</th>
+      <th>Owner</th>
+      <th>Department</th>
+      <th>Tools</th>
+      <th>Status</th>
+      <th>Reports</th>
+      <th>Hrs/Wk</th>
+      <th>Cost/Wk</th>
+      <th>Frequency</th>
+    </tr></thead>
+    <tbody>
+    ${filtered.map(e => {
+      const c = calcEntry(e);
+      const logs = (e.usageLogs||[]).length;
+      const barW = Math.round((logs / maxLogs) * 100);
+      return `<tr onclick="openDetail('${e.id}')">
+        <td><strong>${esc(e.name)}</strong></td>
+        <td>${esc(e.owner||'—')}</td>
+        <td><span class="badge ${deptClass(e.dept||'')}">${esc(e.dept||'—')}</span></td>
+        <td style="font-size:12px;color:var(--text-muted)">${esc(e.tools||'—')}</td>
+        <td>${statusBadge(e.status)}</td>
+        <td>
+          <div class="usage-bar-wrap">
+            <div class="usage-bar-bg"><div class="usage-bar-fill" style="width:${barW}%"></div></div>
+            <span class="usage-count">${logs}</span>
+          </div>
+        </td>
+        <td><strong>${c.hrs > 0 ? fmtH(c.hrs) : '—'}</strong></td>
+        <td>${c.cost > 0 ? fmt$(c.cost) : '—'}</td>
+        <td style="font-size:12px;color:var(--text-muted)">${esc(e.freq||'—')}</td>
+      </tr>`;
+    }).join('')}
+    </tbody></table>`;
+}
+
+// ══════════════════════════════════════════════
+//  DASHBOARD RENDER
+// ══════════════════════════════════════════════
+function renderDashboard() {
+  const entries = getData();
+  const c = calcAll(entries);
+
+  document.getElementById('topMetrics').innerHTML = `
+    <div class="metric-card accent-teal">
+      <div class="metric-label">Hours Recovered / Week</div>
+      <div class="metric-value">${c.totalHrs.toFixed(1)}</div>
+      <div class="metric-sub">Across ${entries.length} project${entries.length!==1?'s':''}</div>
+    </div>
+    <div class="metric-card accent-green">
+      <div class="metric-label">Cost Recovered / Week</div>
+      <div class="metric-value">${fmt$(c.totalCost)}</div>
+      <div class="metric-sub">Based on LCR rate card</div>
+    </div>
+    <div class="metric-card accent-orange">
+      <div class="metric-label">FTE Equivalent</div>
+      <div class="metric-value">${fmtFTE(c.fte)}</div>
+      <div class="metric-sub">Hours recovered / 40</div>
+    </div>
+    <div class="metric-card accent-navy">
+      <div class="metric-label">Annualized Recovery</div>
+      <div class="metric-value">${fmt$(c.annualized)}</div>
+      <div class="metric-sub">Cost/wk × 52 weeks</div>
+    </div>`;
+
+  function renderBars(containerEl, data, key, formatter, colorBase) {
+    const items = Object.entries(data).sort((a,b) => b[1][key] - a[1][key]).slice(0, 8);
+    const max = Math.max(1, ...items.map(i => i[1][key]));
+    containerEl.innerHTML = items.length ? items.map(([label, vals], idx) => `
+      <div class="bar-row">
+        <div class="bar-label" title="${esc(label)}">${esc(label)}</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:${Math.round(vals[key]/max*100)}%;background:${BAR_COLORS[idx%BAR_COLORS.length]}"></div></div>
+        <div class="bar-val">${formatter(vals[key])}</div>
+      </div>`).join('') : '<p style="font-size:13px;color:var(--text-muted)">No data yet</p>';
+  }
+
+  renderBars(document.getElementById('deptHrsBars'), c.byDept, 'hrs', fmtH);
+  renderBars(document.getElementById('deptCostBars'), c.byDept, 'cost', fmt$);
+
+  const projData = {};
+  Object.entries(c.byProj).forEach(([k,v]) => { projData[k] = v; });
+  renderBars(document.getElementById('projHrsBars'), projData, 'hrs', fmtH);
+  renderBars(document.getElementById('projCostBars'), projData, 'cost', fmt$);
+}
+
+// ══════════════════════════════════════════════
+//  SUBMIT PROJECT
+// ══════════════════════════════════════════════
+async function handleSubmit(event) {
+  event.preventDefault();
+  const entry = {
+    id: genId(),
+    name: val('f_name'),
+    owner: val('f_owner'),
+    dept: val('f_dept'),
+    tools: val('f_tools'),
+    status: val('f_status'),
+    freq: val('f_freq'),
+    manual: val('f_manual'),
+    outcome: val('f_outcome'),
+    artifact: val('f_artifact'),
+    link: val('f_link'),
+    goal: val('f_goal'),
+    created: new Date().toISOString(),
+    usageLogs: []
+  };
+  const entries = getData();
+  entries.push(entry);
+  await setData(entries);
+
+  // Seed remember me from owner field
+  const r = loadRemember();
+  if (!r || !r.name) {
+    saveRemember(entry.owner, '');
+    updateRememberBadge();
+  }
+
+  clearSubmitForm();
+  showToast('Project "' + entry.name + '" saved to shared portfolio');
+  showTab('portfolio');
+}
+function val(id) { return (document.getElementById(id)?.value || '').trim(); }
+function clearSubmitForm() {
+  document.getElementById('submitForm').reset();
+}
+
+// ══════════════════════════════════════════════
+//  DETAIL VIEW
+// ══════════════════════════════════════════════
+let currentDetailId = null;
+function openDetail(id) {
+  const entries = getData();
+  const e = entries.find(x => x.id === id);
+  if (!e) return;
+  currentDetailId = id;
+  const c = calcEntry(e);
+
+  document.getElementById('dTitle').textContent = e.name;
+  document.getElementById('dMeta').innerHTML = `
+    <span>${esc(e.owner||'—')}</span>
+    <span>${esc(e.dept||'—')}</span>
+    <span>${statusBadge(e.status)}</span>
+    <span style="font-size:11px">${new Date(e.created).toLocaleDateString()}</span>`;
+
+  document.getElementById('dImpact').innerHTML = `
+    <div class="impact-card"><div class="impact-val">${c.people.length}</div><div class="impact-lbl">People Using</div></div>
+    <div class="impact-card"><div class="impact-val">${c.hrs.toFixed(1)}</div><div class="impact-lbl">Hrs/Wk Saved</div></div>
+    <div class="impact-card"><div class="impact-val">${fmt$(c.cost)}</div><div class="impact-lbl">Cost/Wk Saved</div></div>
+    <div class="impact-card"><div class="impact-val">${fmt$(c.annualized)}</div><div class="impact-lbl">Annualized</div></div>`;
+
+  const fields = [
+    ['Tools Used', e.tools],
+    ['Frequency / Trigger', e.freq],
+    ['Manual Work Eliminated', e.manual],
+    ['Business Outcome', e.outcome],
+    ['Output / Artifact', e.artifact],
+    ['Strategic Goal', e.goal],
+    ['Artifact Link', e.link ? `<a href="${esc(e.link)}" target="_blank" rel="noreferrer">${esc(e.link)}</a>` : null],
+  ].filter(f => f[1]);
+  document.getElementById('dFields').innerHTML = fields.map(([l,v]) =>
+    `<div class="detail-field"><label>${l}</label><p>${v}</p></div>`).join('');
+
+  // Adoption cards
+  document.getElementById('adoptionGrid').innerHTML = c.people.length
+    ? c.people.map(p => `
+        <div class="adoption-card">
+          <div class="adoption-name">${esc(p.name)}</div>
+          <div class="adoption-role">${esc(p.role)}</div>
+          <div class="adoption-hrs">${p.hrs.toFixed(1)}h<span style="font-size:11px;font-weight:400;color:var(--text-muted)">/wk</span></div>
+          <div class="adoption-sub">${fmt$(p.cost)}/wk saved</div>
+          ${p.notes.length ? `<div class="adoption-note">"${esc(p.notes[p.notes.length-1])}"</div>` : ''}
+        </div>`).join('')
+    : '<p style="font-size:13px;color:var(--text-muted);grid-column:1/-1">No usage reports yet. Be the first to log your usage!</p>';
+
+  // Hide log form, prefill
+  document.getElementById('logForm').style.display = 'none';
+  prefillLogForm();
+
+  document.getElementById('detailOverlay').classList.add('open');
+  document.body.classList.add('modal-open');
+}
+function closeDetailBtn() {
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.body.classList.remove('modal-open');
+  currentDetailId = null;
+}
+function closeDetail(event) {
+  if (event.target === document.getElementById('detailOverlay')) closeDetailBtn();
+}
+function toggleLogForm() {
+  const f = document.getElementById('logForm');
+  f.style.display = f.style.display === 'none' ? 'block' : 'none';
+  if (f.style.display === 'block') prefillLogForm();
+}
+
+// ══════════════════════════════════════════════
+//  SUBMIT USAGE LOG
+// ══════════════════════════════════════════════
+async function submitUsageLog() {
+  if (!currentDetailId) return;
+  const name = document.getElementById('log_name').value.trim();
+  const role = document.getElementById('log_role').value;
+  const tool = document.getElementById('log_tool').value;
+  const freq = document.getElementById('log_freq').value;
+  const time = document.getElementById('log_time').value;
+  const note = document.getElementById('log_note').value.trim();
+
+  if (!name || !role || !tool || !freq || !time) {
+    showToast('Please fill in all required fields');
+    return;
+  }
+
+  const log = {
+    name, role, tool,
+    freq: parseFloat(freq),
+    time_saved: parseFloat(time),
+    note,
+    ts: new Date().toISOString()
+  };
+
+  const entries = getData();
+  const idx = entries.findIndex(e => e.id === currentDetailId);
+  if (idx < 0) return;
+  if (!entries[idx].usageLogs) entries[idx].usageLogs = [];
+  entries[idx].usageLogs.push(log);
+  await setData(entries);
+
+  // Save remember me
+  saveRemember(name, role);
+  updateRememberBadge();
+
+  // Reset form fields (but keep name/role)
+  document.getElementById('log_tool').value = '';
+  document.getElementById('log_freq').value = '';
+  document.getElementById('log_time').value = '';
+  document.getElementById('log_note').value = '';
+
+  showToast('Usage logged and synced! Thank you, ' + name);
+  openDetail(currentDetailId);
+  document.getElementById('logForm').style.display = 'none';
+}
+
+// ══════════════════════════════════════════════
+//  SYNC & EXPORT
+// ══════════════════════════════════════════════
+function renderSync() {
+  document.getElementById('chatgptPrompt').textContent = CHATGPT_PROMPT;
+}
+function copyPrompt() {
+  navigator.clipboard.writeText(CHATGPT_PROMPT).then(() => showToast('Prompt copied to clipboard'));
+}
+function exportJSON() {
+  const data = loadData();
+  data.exported_at = new Date().toISOString();
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'fullbay_ai_portfolio_export_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Export downloaded');
+}
+function mergeImport(jsonStr) {
+  const result = document.getElementById('merge-result');
+  try {
+    jsonStr = jsonStr.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
+    const incoming = JSON.parse(jsonStr);
+    const newEntries = incoming.entries || [];
+    if (!Array.isArray(newEntries)) throw new Error('No entries array found');
+
+    const existing = getData();
+    const existingMap = {};
+    existing.forEach(e => { existingMap[e.id] = e; });
+
+    let added = 0, merged = 0;
+    newEntries.forEach(ne => {
+      if (!ne.id) ne.id = genId();
+      if (!existingMap[ne.id]) {
+        existing.push(ne);
+        added++;
+      } else {
+        const existLogs = existingMap[ne.id].usageLogs || [];
+        const existTs = new Set(existLogs.map(l => l.ts));
+        const newLogs = (ne.usageLogs || []).filter(l => !existTs.has(l.ts));
+        existingMap[ne.id].usageLogs = [...existLogs, ...newLogs];
+        merged++;
+      }
+    });
+    // Push merged data to cloud
+    const d = loadLocal();
+    d.entries = existing;
+    saveData(d);
+    result.className = 'success';
+    result.textContent = `Merge complete: ${added} new project${added!==1?'s':''} added, ${merged} existing project${merged!==1?'s':''} updated. Syncing to cloud...`;
+    showToast('Import merged and syncing');
+    document.getElementById('jsonPasteArea').value = '';
+  } catch(e) {
+    result.className = 'error';
+    result.textContent = 'Import failed: ' + e.message;
+  }
+}
+function importFromPaste() {
+  const txt = document.getElementById('jsonPasteArea').value.trim();
+  if (!txt) { showToast('Paste JSON first'); return; }
+  mergeImport(txt);
+}
+function handleFileImport(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => mergeImport(e.target.result);
+  reader.readAsText(file);
+  event.target.value = '';
+}
+function handleDragOver(e) { e.preventDefault(); document.getElementById('dropZone').classList.add('dragover'); }
+function handleDragLeave() { document.getElementById('dropZone').classList.remove('dragover'); }
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('dropZone').classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => mergeImport(ev.target.result);
+  reader.readAsText(file);
+}
+
+// ══════════════════════════════════════════════
+//  UTILS
+// ══════════════════════════════════════════════
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._to);
+  t._to = setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+// ══════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', async () => {
+  updateRememberBadge();
+  // Show cached data immediately while cloud loads
+  renderPortfolio();
+  // Then fetch from cloud and re-render
+  await fetchFromCloud();
+  renderPortfolio();
+  // Auto-refresh every 60 seconds so teammates' changes appear
+  setInterval(refreshFromCloud, 60000);
+});
+</script>
+</body>
+</html>
