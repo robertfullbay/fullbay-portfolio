@@ -397,6 +397,30 @@ textarea { resize: vertical; min-height: 80px; }
 
 /* ── SCROLL LOCK ── */
 body.modal-open { overflow: hidden; }
+
+/* ── SYNC INDICATOR ── */
+.sync-indicator { position: fixed; top: 0; left: 0; right: 0; height: 9px; z-index: 9999; pointer-events: none; opacity: 0; transition: opacity 0.2s; }
+.sync-indicator.active { opacity: 1; }
+.sync-indicator-bar { height: 9px; background: linear-gradient(90deg, var(--teal), var(--teal-light), #7ECFDA, var(--teal)); background-size: 200% 100%; animation: syncSlide 1.2s linear infinite; }
+@keyframes syncSlide { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.sync-badge {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(16px);
+  background: var(--navy-dark); color: white;
+  padding: 10px 18px; border-radius: 30px;
+  font-size: 12px; font-weight: 500;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  z-index: 998; opacity: 0;
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.sync-badge.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.sync-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+.sync-badge-dot.spinning { animation: spinPulse 0.8s ease-in-out infinite alternate; }
+.sync-badge-dot.error { background: var(--orange); }
+.sync-badge-dot.ok { background: #22c55e; animation: none; }
+@keyframes spinPulse { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
 </style>
 </head>
 <body>
@@ -721,6 +745,11 @@ body.modal-open { overflow: hidden; }
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
+<div class="sync-indicator" id="syncIndicator"><div class="sync-indicator-bar"></div></div>
+<div class="sync-badge" id="syncBadge">
+  <div class="sync-badge-dot spinning" id="syncDot"></div>
+  <span id="syncBadgeText">Syncing...</span>
+</div>
 
 <script>
 // ══════════════════════════════════════════════
@@ -818,10 +847,35 @@ When done, output ONLY a valid JSON object with NO markdown code fences, NO expl
 // Sync status indicator
 function setSyncStatus(state, msg) {
   const el = document.getElementById('syncStatus');
-  if (!el) return;
-  const states = { loading: '#8E97A8', ok: '#1A7A8A', error: '#C05600', saving: '#C05600' };
-  el.style.color = states[state] || '#8E97A8';
-  el.textContent = msg;
+  if (el) {
+    const colors = { loading: '#8E97A8', ok: '#1A7A8A', error: '#C05600', saving: '#C05600' };
+    el.style.color = colors[state] || '#8E97A8';
+    el.textContent = msg;
+  }
+  const bar = document.getElementById('syncIndicator');
+  const badge = document.getElementById('syncBadge');
+  const dot = document.getElementById('syncDot');
+  const txt = document.getElementById('syncBadgeText');
+  if (!bar || !badge) return;
+  if (state === 'loading' || state === 'saving') {
+    bar.classList.add('active');
+    badge.classList.add('show');
+    dot.className = 'sync-badge-dot spinning';
+    txt.textContent = state === 'saving' ? 'Saving to cloud...' : 'Syncing from cloud...';
+    clearTimeout(badge._to);
+  } else if (state === 'ok') {
+    bar.classList.remove('active');
+    dot.className = 'sync-badge-dot ok';
+    txt.textContent = msg || 'Saved';
+    clearTimeout(badge._to);
+    badge._to = setTimeout(() => badge.classList.remove('show'), 2000);
+  } else if (state === 'error') {
+    bar.classList.remove('active');
+    dot.className = 'sync-badge-dot error';
+    txt.textContent = msg || 'Sync error';
+    clearTimeout(badge._to);
+    badge._to = setTimeout(() => badge.classList.remove('show'), 4000);
+  }
 }
 
 // LocalStorage helpers (cache)
